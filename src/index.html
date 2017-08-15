@@ -11,20 +11,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
   </head>
   <body>
-    <div class='container'>
+    <div class="container">
       <h1>Dutch Auction</h1>
       <!-- Contract Form -->
       <form id="contract-form" class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <input id="contract-address" type="text" class="validate">
-            <label for="contract-address">Contract Address</label>
+            <input id="address-input" type="text" class="validate" required>
+            <label for="address-input">Contract Address</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="abi" class="materialize-textarea"></textarea>
-            <label for="abi">ABI / JSON Interface</label>
+            <textarea id="abi-input" class="materialize-textarea" required></textarea>
+            <label for="abi-input">ABI / JSON Interface</label>
           </div>
         </div>
         <button class="btn waves-effect waves-light" type="submit" name="action">
@@ -32,7 +32,10 @@
         </button>
       </form>
 
-      <!-- Auction Interaction -->
+      <!-- Contract UI -->
+      <div id='contract-ui' class='col s12'>
+        <!-- Interact with the contract here. -->
+      </div>
     </div>
 
     <!--Import jQuery before materialize.js-->
