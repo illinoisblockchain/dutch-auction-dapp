@@ -2,7 +2,7 @@
 This is the starter repo for the Vickrey Auction project.
 
 ## Development
-If you'd like to run the `liteserver` development server for front-end hot reloading, install dependencies and run the dev task with the following terminal commands:
+If you'd like to run the `lite-server` development server for front-end hot reloading, install dependencies and run the dev task with the following terminal commands:
   ```javascript
   $ npm install
   $ npm run dev
