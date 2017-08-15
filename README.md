@@ -8,4 +8,4 @@ If you'd like to run the `lite-server` development server for front-end hot relo
   $ npm run dev
   ```
 
-The app will be served at [localhost:3001](localhost:30001).
+The app will be served at [localhost:3001](http://localhost:30001).
