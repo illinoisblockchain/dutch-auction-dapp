@@ -11,10 +11,10 @@ if (typeof web3 !== 'undefined') {
   window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 }
 
-/* Names and desired callbacks of methods that are constant
+/* Names and desired callbacks of contract methods that are constant
 ** http://solidity.readthedocs.io/en/develop/contracts.html#constant-functions
 ** ********************************** */
-var constantContractMethods = [
+var constantContractOpts = [
   {
     name: 'currentPrice',
     callback: function(err, currentPrice) {
@@ -36,10 +36,10 @@ var constantContractMethods = [
   }
 ];
 
-/* Names and desired callbacks of methods that mutate state
+/* Names and desired callbacks of contract methods that mutate state
 ** https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-methods
 ** ********************************** */
-var mutatingContractMethods = [
+var mutatingContractOpts = [
   {
     name: 'bid',
     callback: function(err, result) { }
@@ -76,7 +76,7 @@ $(function() {
       var contract = web3.eth.contract(abi);
       var deployedContract = contract.at(address);
       // the contract address
-      console.log('address', deployedContract.address);
+      console.log('contract address:', deployedContract.address);
       buildContractUI(deployedContract);
     });
 
@@ -106,11 +106,11 @@ $(function() {
           // check tx hash on the first call (transaction send)
           if (!deployedContract.address) {
             // The hash of the transaction, which deploys the contract
-            console.log('txHash', deployedContract.transactionHash)
+            console.log('txHash:', deployedContract.transactionHash)
           // check address on the second call (contract deployed)
           } else {
             // the contract address
-            console.log('address', deployedContract.address);
+            console.log('contract address:', deployedContract.address);
             buildContractUI(deployedContract);
           }
         }
@@ -124,7 +124,7 @@ $(function() {
       $contractFormsContainer.hide();
 
       $constantFunctionsContainer = $('#constant-functions-container');
-      $constantFunctions = constantContractMethods.map(function(opts, i) {
+      $constantFunctions = constantContractOpts.map(function(opts, i) {
         var methodName = opts.name;
         var callback = opts.callback;
         return $('<div class="row">')
