@@ -9,6 +9,11 @@
 
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <style>
+      .no-uppercase {
+        text-transform: none;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -40,20 +45,20 @@
           <h3>Deploy Contract</h3>
           <div class="row">
             <div class="input-field col s6">
-              <input id="deploy-initialPrice-input" type="number" class="validate" placeholder="ether" min="0" step="any" required>
-              <label for="deploy-initialPrice-input">Initial Price</label>
+              <input id="deploy-initialPrice-input" type="number" class="validate" placeholder="20" min="0" step="any" required>
+              <label for="deploy-initialPrice-input">Initial Price (ether)</label>
             </div>
             <div class="input-field col s6">
-              <input id="deploy-biddingPeriod-input" type="number" class="validate" placeholder="blocks" min="0" step="any" required>
-              <label for="deploy-biddingPeriod-input">Bidding Period</label>
+              <input id="deploy-biddingPeriod-input" type="number" class="validate" placeholder="10" min="0" step="any" required>
+              <label for="deploy-biddingPeriod-input">Bidding Period (blocks)</label>
             </div>
             <div class="input-field col s6">
-              <input id="deploy-offerPriceDecrement-input" type="number" class="validate" placeholder="ether" min="0" step="any" required>
-              <label for="deploy-offerPriceDecrement-input">Offer Price Decrement</label>
+              <input id="deploy-offerPriceDecrement-input" type="number" class="validate" placeholder="1" min="0" step="any" required>
+              <label for="deploy-offerPriceDecrement-input">Offer Price Decrement (ether)</label>
             </div>
             <div class="input-field col s6">
-              <input id="deploy-gas-input" type="number" class="validate" placeholder="wei" value="3000000" min="0" step="any" required>
-              <label for="deploy-gas-input">Gas</label>
+              <input id="deploy-gas-input" type="number" class="validate" placeholder="3000000" min="0" step="any" required>
+              <label for="deploy-gas-input">Gas (wei)</label>
             </div>
           </div>
           <div class="row">
@@ -86,11 +91,20 @@
             </div>
           </div>
         </form>
-      <div>
+      </div>
 
       <!-- Contract UI -->
-      <div id='contract-ui-container' class='col s12'>
+      <div id='contract-ui-container' class='row'>
         <!-- Interact with the contract here. -->
+        <h3>Constant Functions</h3>
+        <div id='constant-functions-container' class='col s12'>
+
+        </div>
+
+        <h3>Mutating Functions</h3>
+        <div id='mutating-functions-container' class='col s12'>
+
+        </div>
       </div>
     </div>
 
