@@ -13,27 +13,83 @@
   <body>
     <div class="container">
       <h1>Dutch Auction</h1>
-      <!-- Contract Form -->
-      <form id="contract-form" class="col s12">
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="address-input" type="text" class="validate" required>
-            <label for="address-input">Contract Address</label>
+
+      <div id='contract-forms-container' class='row'>
+        <!-- Access Contract Form -->
+        <form id="access-contract-form" class="col s12">
+          <h3>Access Contract</h3>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="access-address-input" type="text" class="validate" placeholder="0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8" required>
+              <label for="access-address-input">Contract Address</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <textarea id="abi-input" class="materialize-textarea" required></textarea>
-            <label for="abi-input">ABI / JSON Interface</label>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="spacing" type="text" class="validate" placeholder="Placeholder" required>
+              <label for="spacing">Placeholder</label>
+            </div>
           </div>
-        </div>
-        <button class="btn waves-effect waves-light" type="submit" name="action">
-          ACCESS
-        </button>
-      </form>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="access-bi-input" class="materialize-textarea" placeholder='[{ "type":"contructor", "inputs": [{ "name":"param1", "type":"uint256", "indexed":true }], "name":"Event" }, { "type":"function", "inputs": [{"name":"a", "type":"uint256"}], "name":"foo", "outputs": [] }]' required></textarea>
+              <label for="access-abi-input">ABI / JSON Interface</label>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" type="submit" name="action">
+            ACCESS
+          </button>
+        </form>
+
+        <!--  Deploy Contract form-->
+        <form id="deploy-contract-form" class="col s12">
+          <h3>Deploy Contract</h3>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="deploy-initialPrice-input" type="number" class="validate" placeholder="ether" min="0" step="any" required>
+              <label for="deploy-initialPrice-input">Initial Price</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="deploy-biddingPeriod-input" type="number" class="validate" placeholder="blocks" min="0" step="any" required>
+              <label for="deploy-biddingPeriod-input">Bidding Period</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="deploy-offerPriceDecrement-input" type="number" class="validate" placeholder="ether" min="0" step="any" required>
+              <label for="deploy-offerPriceDecrement-input">Offer Price Decrement</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="deploy-gas-input" type="number" class="validate" placeholder="wei" value="3000000" min="0" step="any" required>
+              <label for="deploy-gas-input">Gas</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="deploy-abi-input" class="materialize-textarea" placeholder='[{ "type":"contructor", "inputs": [{ "name":"param1", "type":"uint256", "indexed":true }], "name":"Event" }, { "type":"function", "inputs": [{"name":"a", "type":"uint256"}], "name":"foo", "outputs": [] }]' required></textarea>
+              <label for="deploy-abi-input">ABI / JSON Interface</label>
+            </div>
+          </div>
+          <div class='row'>
+            <div class="col s6">
+              <button class="btn waves-effect waves-light" type="submit" name="action">
+                DEPLOY
+              </button>
+            </div>
+            <div class="switch col s6">
+              <label for="deploy-testMode-input">Test Mode</label>
+              <br/>
+              <label>
+                Off
+                <input id="deploy-testMode-input" type="checkbox">
+                <span class="lever"></span>
+                On
+              </label>
+            </div>
+          </div>
+        </form>
+      <div>
 
       <!-- Contract UI -->
-      <div id='contract-ui' class='col s12'>
+      <div id='contract-ui-container' class='col s12'>
         <!-- Interact with the contract here. -->
       </div>
     </div>
