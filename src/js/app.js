@@ -18,7 +18,7 @@ var constantContractOpts = [
   {
     name: 'currentPrice',
     callback: function(err, currentPrice) {
-      var result = web3.fromWei(currentPrice, 'ether').toString();
+      var result = web3.fromWei(currentPrice, 'ether').toString(10);
       $('#currentPrice-value').text(result)
     }
   },
