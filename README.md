@@ -1,5 +1,5 @@
 # Vickrey Auction Dapp
-This is the starter repo for the Vickrey Auction project.
+Starter repo for the Vickrey Auction project.
 
 ## Development
 If you'd like to run the `lite-server` development server for front-end hot reloading, install dependencies and run the dev task with the following terminal commands:
