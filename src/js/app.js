@@ -1,3 +1,5 @@
+/* Connect to a web3 provider
+** ********************************** */
 // Supports Mist, and other wallets that provide 'web3'.
 if (typeof web3 !== 'undefined') {
   // Use the Mist/wallet/Metamask provider.
@@ -9,10 +11,52 @@ if (typeof web3 !== 'undefined') {
   window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 }
 
-function buildContractUI(deployedContract) {
-  var address = deployedContract.address
-  console.log({deployedContract, address})
-}
+/* Names and desired callbacks of methods that are constant
+** http://solidity.readthedocs.io/en/develop/contracts.html#constant-functions
+** ********************************** */
+var constantContractMethods = [
+  {
+    name: 'currentPrice',
+    callback: function(err, currentPrice) {
+      var result = web3.fromWei(currentPrice, 'ether').toString();
+      $('#currentPrice-value').text(result)
+    }
+  },
+  {
+    name: 'biddingOpen',
+    callback: function(err, isOpen) {
+      $('#biddingOpen-value').text(isOpen);
+    }
+  },
+  {
+    name: 'getWinningBidder',
+    callback: function(err, winningBidder) {
+      $('#getWinningBidder-value').text(winningBidder);
+    }
+  }
+];
+
+/* Names and desired callbacks of methods that mutate state
+** https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-methods
+** ********************************** */
+var mutatingContractMethods = [
+  {
+    name: 'bid',
+    callback: function(err, result) { }
+  },
+  { // creator only
+    name: 'finalize',
+    callback: function(err, result) { }
+  },
+  { // test only
+    name: 'overrideTime',
+    callback: function(err, result) { }
+  },
+  { // test only
+    name: 'clearTime',
+    callback: function(err, result) { }
+  }
+];
 
 $(function() {
   $(window).load(function() {
@@ -20,16 +64,25 @@ $(function() {
     var $accessContractForm = $('#access-contract-form');
     var $deployContractForm = $('#deploy-contract-form');
     var $contractUIContainer = $('#contract-ui-container');
+    $contractUIContainer.hide()
 
+    /* Get a contract instance on form submit
+    ** https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcontract
+    ** ********************************** */
     $accessContractForm.submit(function(e) {
       e.preventDefault();
       var abi = JSON.parse($('#access-abi-input').val().trim());
       var address = $('#access-address-input').val();
       var contract = web3.eth.contract(abi);
       var deployedContract = contract.at(address);
+      // the contract address
+      console.log('address', deployedContract.address);
       buildContractUI(deployedContract);
     });
 
+    /* Deploy a contract on form submit
+    ** https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcontract
+    ** ********************************** */
     $deployContractForm.submit(function(e) {
       e.preventDefault()
       var initialPrice = web3.toWei($('#deploy-initialPrice-input').val(), 'ether');
@@ -63,5 +116,31 @@ $(function() {
         }
       )
     });
+
+    /* Use jQuery to build out some interaction points with the contract
+    ** ********************************** */
+    function buildContractUI(deployedContract) {
+      $contractUIContainer.show();
+      $contractFormsContainer.hide();
+
+      $constantFunctionsContainer = $('#constant-functions-container');
+      $constantFunctions = constantContractMethods.map(function(opts, i) {
+        var methodName = opts.name;
+        var callback = opts.callback;
+        return $('<div class="row">')
+          .append($('<div class="col s6">')
+            .append($('<button class="btn waves-effect waves-light no-uppercase">')
+              .text(methodName + '()')
+              .click(function(e) { deployedContract[methodName](callback) })))
+          .append($('<div class="col s6">')
+            .append($('<p id="' + methodName + '-value">')
+              .text('fetch me!')))
+      })
+      $constantFunctionsContainer.append($constantFunctions)
+
+      $mutatingFunctionsContainer = $('#mutating-functions-container');
+      /* TODO: build out UI for mutating functions */
+
+    }
   });
 });
