@@ -1,5 +1,5 @@
-# Vickrey Auction Dapp
-Starter repo for the Vickrey Auction project.
+# Dutch Auction Dapp
+Starter repo for the Dutch Auction project.
 
 ## Development
 If you'd like to run the `lite-server` development server for front-end hot reloading, install dependencies and run the dev task with the following terminal commands:
