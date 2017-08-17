@@ -109,6 +109,6 @@ $(function() {
     initAccessContractForm();
     initDeployContractForm();
     // hide controls for now
-    $('#contract-controls-container').show();
+    $('#contract-controls-container').hide();
   });
 });
